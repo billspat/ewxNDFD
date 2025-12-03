@@ -6,7 +6,6 @@
 # ignore components that the Hatch template created but that not used currently
 # remove these from gitignore or from the project as it develops
 
-.github
 .editorconfig
 .pre-commit-config.yaml
 .readthedocs.yaml
