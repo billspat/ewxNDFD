@@ -216,7 +216,8 @@ features = [
 ]
 
 [[tool.hatch.envs.test.matrix]]
-python = ["3.11", "3.12"]
+# test on just one Python version (used in prod) to stay w/in github free tier limits
+python = ["3.11"]
 
 [tool.hatch.envs.test.scripts]
 run = "pytest {args:--cov=ewxndfd --cov-report=term-missing --cov-report=xml}"
