@@ -216,7 +216,7 @@ features = [
 ]
 
 [[tool.hatch.envs.test.matrix]]
-python = ["3.11",]
+python = ["3.11", "3.12"]
 
 [tool.hatch.envs.test.scripts]
 run = "pytest {args:--cov=ewxndfd --cov-report=term-missing --cov-report=xml}"
