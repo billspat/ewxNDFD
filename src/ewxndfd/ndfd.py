@@ -33,30 +33,40 @@ class NDFD():
     forecast csv data files
     """
     
-    def __init__(self, ndfd_dir:str, variable_type: str):
+    def __init__(self, ndfd_dir:str, variable_type:str, unit_str:str, unit_abbr:str, tz:str=DEFAULT_TIME_ZONE):
         """initialize NDFDFile object for a specific weather variable
 
         Args:
             path (str): base path where NDFD files are found
             variable_type (str): type of weather variable
+            unit_str (str): full unit string for variable
+            unit_abbr (str): abbreviated unit string for variable
+            tz (str): timezone string for local time zone
 
         Raises:
             ValueError: must be a valid variable type
+            ValueError: NDFD directory must exist
         """
         
-        # set variable type if it's valid to read-only value
-        if variable_type not in DAILY_NDFD_VARIABLE_TYPES:
-            raise ValueError(f"Invalid variable type: {variable_type}")
-        
-        self._variable_type = variable_type
         
         # self.ndfd_dir(ndfd_dir) # set via property setter, validates path
         self.ndfd_dir = ndfd_dir
+
+        # set variable type if it's valid to read-only value
+        if variable_type not in DAILY_NDFD_VARIABLE_TYPES:
+            raise ValueError(f"Invalid variable type: {variable_type}")
+        else:
+            self._variable_type = variable_type
+        
+        self.unit_str = unit_str
+        self.unit_abbr = unit_abbr
+                
+        self.tz = tz
         
         self.ndfd_data_cache = []
         self.ndfd_file_path_cache = ""
         self.forecast_period = ""    
-        self.tz = DEFAULT_TIME_ZONE
+        
 
     @property
     def variable_type(self)->str:
