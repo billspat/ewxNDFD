@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dwml version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd">
+    <head>
+        <product concise-name="dwmlByDay" operational-mode="developmental" srsName="WGS 1984">
+            <creation-date refresh-frequency="PT1H">2025-12-12T03:03:42+00:00</creation-date>
+            <category>current observations and forecast</category>
+        </product>
+        <source>
+            <production-center>Grand Rapids, MI</production-center>
+            <credit>https://www.weather.gov/grr</credit>
+            <more-information>http://www.nws.noaa.gov/forecasts/xml/</more-information>
+        </source>
+    </head>
+    <data type="forecast">
+        <location>
+            <location-key>point1</location-key>
+            <point latitude="42.7043" longitude="-84.4781"/>
+            <area-description>3 mi S East Lansing MI</area-description>
+            <height datum="mean sea level" height-units="feet">886</height>
+        </location>
+        <moreWeatherInformation applicable-location="point1">https://forecast.weather.gov/point/42.7043,-84.4781</moreWeatherInformation>
+        <time-layout time-coordinate="local" summarization="12hourly">
+            <layout-key>k-p12h-n14-1</layout-key>
+            <start-valid-time period-name="Tonight">2025-12-11T22:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Friday">2025-12-12T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Friday Night">2025-12-12T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Saturday">2025-12-13T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Saturday Night">2025-12-13T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Sunday">2025-12-14T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Sunday Night">2025-12-14T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Monday">2025-12-15T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Monday Night">2025-12-15T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Tuesday">2025-12-16T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Tuesday Night">2025-12-16T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Wednesday">2025-12-17T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Wednesday Night">2025-12-17T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Thursday">2025-12-18T06:00:00-05:00</start-valid-time>
+        </time-layout>
+        <time-layout time-coordinate="local" summarization="12hourly">
+            <layout-key>k-p24h-n7-1</layout-key>
+            <start-valid-time period-name="Tonight">2025-12-11T22:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Friday Night">2025-12-12T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Saturday Night">2025-12-13T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Sunday Night">2025-12-14T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Monday Night">2025-12-15T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Tuesday Night">2025-12-16T18:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Wednesday Night">2025-12-17T18:00:00-05:00</start-valid-time>
+        </time-layout>
+        <time-layout time-coordinate="local" summarization="12hourly">
+            <layout-key>k-p24h-n7-2</layout-key>
+            <start-valid-time period-name="Friday">2025-12-12T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Saturday">2025-12-13T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Sunday">2025-12-14T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Monday">2025-12-15T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Tuesday">2025-12-16T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Wednesday">2025-12-17T06:00:00-05:00</start-valid-time>
+            <start-valid-time period-name="Thursday">2025-12-18T06:00:00-05:00</start-valid-time>
+        </time-layout>
+        <parameters applicable-location="point1">
+            <temperature type="minimum" units="Fahrenheit" time-layout="k-p24h-n7-1">
+                <name>Daily Minimum Temperature</name>
+                <value>10</value>
+                <value>12</value>
+                <value>-1</value>
+                <value>6</value>
+                <value>12</value>
+                <value>25</value>
+                <value>30</value>
+                <temperature type="maximum" units="Fahrenheit" time-layout="k-p24h-n7-2">
+                    <name>Daily Maximum Temperature</name>
+                    <value>26</value>
+                    <value>16</value>
+                    <value>17</value>
+                    <value>20</value>
+                    <value>31</value>
+                    <value>39</value>
+                    <value>40</value>
+                </temperature>
+                <probability-of-precipitation type="12 hour" units="percent" time-layout="k-p12h-n14-1">
+                    <name>12 Hourly Probability of Precipitation</name>
+                    <value>9</value>
+                    <value>19</value>
+                    <value>63</value>
+                    <value>33</value>
+                    <value>29</value>
+                    <value>9</value>
+                    <value>3</value>
+                    <value>16</value>
+                    <value>13</value>
+                    <value>2</value>
+                    <value>8</value>
+                    <value>10</value>
+                    <value>45</value>
+                    <value>46</value>
+                </probability-of-precipitation>
+                <weather time-layout="k-p12h-n14-1">
+                    <name>Weather Type, Coverage, Intensity</name>
+                    <weather-conditions>
+                        <value weather-summary="Mostly Cloudy"/>
+                        <value weather-summary="Partly Sunny then Slight Chance Snow Showers"/>
+                        <value weather-summary="Snow Showers Likely"/>
+                        <value weather-summary="Chance Snow Showers"/>
+                        <value weather-summary="Chance Snow Showers then Mostly Cloudy"/>
+                        <value weather-summary="Partly Sunny"/>
+                        <value weather-summary="Mostly Cloudy"/>
+                        <value weather-summary="Slight Chance Snow Showers"/>
+                        <value weather-summary="Mostly Cloudy"/>
+                        <value weather-summary="Mostly Cloudy"/>
+                        <value weather-summary="Mostly Cloudy"/>
+                        <value weather-summary="Mostly Cloudy"/>
+                        <value weather-summary="Chance Rain Showers"/>
+                        <value weather-summary="Chance Rain Showers"/>
+                    </weather-conditions>
+                </weather>
+                <conditions-icon type="forecast-NWS" time-layout="k-p12h-n14-1">
+                    <name>Conditions Icon</name>
+                    <icon-link>https://api.weather.gov/icons/land/night/cold?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/day/bkn/snow,20?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/night/snow,60?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/day/snow,30?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/night/snow,30/cold?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/day/bkn?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/night/cold?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/day/snow,20?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/night/bkn?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/day/bkn?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/night/bkn?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/day/bkn?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/night/rain_showers,20/rain_showers,50?size=medium</icon-link>
+                    <icon-link>https://api.weather.gov/icons/land/day/rain_showers,50?size=medium</icon-link>
+                </conditions-icon>
+                <wordedForecast time-layout="k-p12h-n14-1" dataSource="grrNetcdf" wordGenerator="noaa.nws.nids.BaselineForecastGenerator">
+                    <name>Text Forecast</name>
+                    <text>Mostly cloudy. Low around 10, with temperatures rising to around 13 overnight. Southwest wind around 2 mph.</text>
+                    <text>A slight chance of snow showers after 4pm. Partly sunny. High near 26, with temperatures falling to around 24 in the afternoon. South wind 1 to 6 mph. Chance of precipitation is 20%.</text>
+                    <text>Snow showers likely. Mostly cloudy. Low around 12, with temperatures rising to around 16 overnight. West southwest wind 5 to 13 mph, with gusts as high as 24 mph. Chance of precipitation is 60%. New snow accumulation of less than half an inch possible.</text>
+                    <text>A chance of snow showers. Mostly cloudy, with a high near 16. Wind chill values as low as -4. West wind 10 to 14 mph, with gusts as high as 25 mph. Chance of precipitation is 30%. New snow accumulation of less than half an inch possible.</text>
+                    <text>A chance of snow showers before 7pm. Mostly cloudy, with a low around -1. West northwest wind 6 to 9 mph, with gusts as high as 21 mph. Chance of precipitation is 30%.</text>
+                    <text>Partly sunny, with a high near 17.</text>
+                    <text>Mostly cloudy, with a low around 6.</text>
+                    <text>A slight chance of snow showers between 7am and 1pm. Mostly cloudy, with a high near 20.</text>
+                    <text>Mostly cloudy, with a low around 12.</text>
+                    <text>Mostly cloudy, with a high near 31.</text>
+                    <text>Mostly cloudy, with a low around 25.</text>
+                    <text>Mostly cloudy, with a high near 39.</text>
+                    <text>A chance of rain showers after 7pm. Mostly cloudy, with a low around 30.</text>
+                    <text>A chance of rain showers. Mostly cloudy, with a high near 40.</text>
+                </wordedForecast>
+            </temperature>
+        </parameters>
+        <data type="current observations">
+            <location>
+                <location-key>point1</location-key>
+                <point latitude="42.77616" longitude="-84.5997"/>
+                <area-description>Capital Region International Airport, MI</area-description>
+                <height datum="mean sea level" height-units="feet">856</height>
+            </location>
+            <moreWeatherInformation applicable-location="point1">https://forecast.weather.gov/obs/KLAN/history</moreWeatherInformation>
+            <time-layout time-coordinate="local">
+                <layout-key>k-p1h-n1-1</layout-key>
+                <start-valid-time period-name="current">2025-12-12T03:10:00+00:00</start-valid-time>
+            </time-layout>
+            <parameters applicable-location="point1">
+                <temperature type="apparent" units="Fahrenheit" time-layout="k-p1h-n1-1">
+                    <value>25</value>
+                </temperature>
+                <temperature type="dew point" units="Fahrenheit" time-layout="k-p1h-n1-1">
+                    <value>19</value>
+                </temperature>
+                <humidity type="relative" time-layout="k-p1h-n1-1">
+                    <value>80</value>
+                </humidity>
+                <weather time-layout="k-p1h-n1-1">
+                    <name>Weather Type, Coverage, Intensity</name>
+                    <weather-conditions weather-summary="Cloudy"/>
+                    <weather-conditions>
+                        <value>
+                            <visibility units="statute miles">10</visibility>
+                        </value>
+                    </weather-conditions>
+                </weather>
+                <conditions-icon type="forecast-NWS" time-layout="k-p1h-n1-1">
+                    <name>Conditions Icon</name>
+                    <icon-link>https://api.weather.gov/icons/land/night/ovc?size=medium</icon-link>
+                </conditions-icon>
+                <direction type="wind" units="degrees true" time-layout="k-p1h-n1-1">
+                    <value>270</value>
+                </direction>
+                <wind-speed type="gust" units="knots" time-layout="k-p1h-n1-1">
+                    <value/>
+                </wind-speed>
+                <wind-speed type="sustained" units="knots" time-layout="k-p1h-n1-1">
+                    <value>5</value>
+                </wind-speed>
+                <pressure type="barometer" units="inches of mercury" time-layout="k-p1h-n1-1">
+                    <value>30.01</value>
+                </pressure>
+            </parameters>
+        </data>
+    </data>
+</dwml>
