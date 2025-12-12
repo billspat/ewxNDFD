@@ -13,9 +13,8 @@ requires = ["hatchling", "hatch-vcs","hatch-zipped-directory",
 
 [project]
 name = "ewxndfd"
-version = "0.0.1"
 # You can chose to use dynamic versioning with hatch or static where you add it manually.
-# dynamic = ["version"]
+dynamic = ["version"]
 description = """
 Python package to work with National Digital Forecast Database (NDFD) gridded 
 weather forecast for the MSU Enviroweather / Michigan Ag Weather Network 
@@ -51,6 +50,9 @@ Homepage = "https://github.com/enviroweather/ewxndfd"
 "Bug Tracker" = "https://github.com/enviroweather/ewxndfd/issues"
 Documentation = "https://ewxndfd.readthedocs.io"
 Download = "https://pypi.org/project/ewxndfd/#files"
+
+[project.scripts]
+ndfd_daily = "ewxndfd.ndfd_forecast_api:main"
 
 [project.optional-dependencies]
 # The groups below should be in the [development-groups] table
@@ -184,6 +186,11 @@ arg-type-hints-in-docstring = true
 check-return-types = false
 check-yield-types = false
 exclude = "_version.py"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
 # Use UV to create Hatch environments
 [tool.hatch.envs.default]
 installer = "uv"
