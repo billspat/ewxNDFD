@@ -1,0 +1,319 @@
+{
+    "@context": [
+        "https://geojson.org/geojson-ld/geojson-context.jsonld",
+        {
+            "@version": "1.1",
+            "wx": "https://api.weather.gov/ontology#",
+            "geo": "http://www.opengis.net/ont/geosparql#",
+            "unit": "http://codes.wmo.int/common/unit/",
+            "@vocab": "https://api.weather.gov/ontology#"
+        }
+    ],
+    "type": "Feature",
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    -84.4645,
+                    42.6926
+                ],
+                [
+                    -84.4622,
+                    42.7143
+                ],
+                [
+                    -84.4916,
+                    42.716
+                ],
+                [
+                    -84.4939,
+                    42.6943
+                ],
+                [
+                    -84.4645,
+                    42.6926
+                ]
+            ]
+        ]
+    },
+    "properties": {
+        "units": "si",
+        "forecastGenerator": "BaselineForecastGenerator",
+        "generatedAt": "2025-12-09T01:47:12+00:00",
+        "updateTime": "2025-12-09T01:03:40+00:00",
+        "validTimes": "2025-12-08T19:00:00+00:00/P7DT9H",
+        "elevation": {
+            "unitCode": "wmoUnit:m",
+            "value": 270.0528
+        },
+        "periods": [
+            {
+                "number": 1,
+                "name": "Tonight",
+                "startTime": "2025-12-08T20:00:00-05:00",
+                "endTime": "2025-12-09T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": -12,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 30
+                },
+                "windSpeed": "4 to 19 km/h",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/night/cold/snow,30?size=medium",
+                "shortForecast": "Mostly Cloudy then Chance Snow Showers",
+                "detailedForecast": "A chance of snow showers after 5am. Mostly cloudy. Low around -12, with temperatures rising to around -8 overnight. South wind 4 to 19 km/h, with gusts as high as 37 km/h. Chance of precipitation is 30%. New snow accumulation of less than one cm possible."
+            },
+            {
+                "number": 2,
+                "name": "Tuesday",
+                "startTime": "2025-12-09T06:00:00-05:00",
+                "endTime": "2025-12-09T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": -1,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 80
+                },
+                "windSpeed": "19 to 24 km/h",
+                "windDirection": "SW",
+                "icon": "https://api.weather.gov/icons/land/day/snow,80/snow_fzra,20?size=medium",
+                "shortForecast": "Snow Showers",
+                "detailedForecast": "Snow showers before 11am, then freezing drizzle likely between 11am and noon, then a slight chance of snow showers and a slight chance of freezing rain between 1pm and 2pm. Cloudy, with a high near -1. Southwest wind 19 to 24 km/h, with gusts as high as 44 km/h. Chance of precipitation is 80%. New snow accumulation of around 2,5 cm possible."
+            },
+            {
+                "number": 3,
+                "name": "Tuesday Night",
+                "startTime": "2025-12-09T18:00:00-05:00",
+                "endTime": "2025-12-10T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": -1,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 99
+                },
+                "windSpeed": "15 to 22 km/h",
+                "windDirection": "SSW",
+                "icon": "https://api.weather.gov/icons/land/night/snow,80/snow,100?size=medium",
+                "shortForecast": "Snow Showers",
+                "detailedForecast": "Snow showers between 7pm and midnight, then rain and snow showers between midnight and 4am, then rain and snow showers. Cloudy. Low around -1, with temperatures rising to around 2 overnight. South southwest wind 15 to 22 km/h, with gusts as high as 43 km/h. Chance of precipitation is 100%. New snow accumulation of 2.5 to 5 cm possible."
+            },
+            {
+                "number": 4,
+                "name": "Wednesday",
+                "startTime": "2025-12-10T06:00:00-05:00",
+                "endTime": "2025-12-10T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": 2,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 99
+                },
+                "windSpeed": "22 km/h",
+                "windDirection": "W",
+                "icon": "https://api.weather.gov/icons/land/day/snow,100/snow,90?size=medium",
+                "shortForecast": "Rain And Snow Showers",
+                "detailedForecast": "Rain and snow showers before 7am, then rain and snow showers. Cloudy, with a high near 2. West wind around 22 km/h, with gusts as high as 43 km/h. Chance of precipitation is 100%. New snow accumulation of less than two cm possible."
+            },
+            {
+                "number": 5,
+                "name": "Wednesday Night",
+                "startTime": "2025-12-10T18:00:00-05:00",
+                "endTime": "2025-12-11T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": -9,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 46
+                },
+                "windSpeed": "7 to 19 km/h",
+                "windDirection": "WNW",
+                "icon": "https://api.weather.gov/icons/land/night/snow,50/snow,20?size=medium",
+                "shortForecast": "Chance Snow Showers",
+                "detailedForecast": "A chance of snow showers. Mostly cloudy, with a low around -9. West northwest wind 7 to 19 km/h, with gusts as high as 41 km/h. Chance of precipitation is 50%. New snow accumulation of less than one cm possible."
+            },
+            {
+                "number": 6,
+                "name": "Thursday",
+                "startTime": "2025-12-11T06:00:00-05:00",
+                "endTime": "2025-12-11T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": -3,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 26
+                },
+                "windSpeed": "9 to 15 km/h",
+                "windDirection": "WNW",
+                "icon": "https://api.weather.gov/icons/land/day/snow,20/snow,30?size=medium",
+                "shortForecast": "Chance Snow Showers",
+                "detailedForecast": "A chance of snow showers. Partly sunny, with a high near -3. Chance of precipitation is 30%."
+            },
+            {
+                "number": 7,
+                "name": "Thursday Night",
+                "startTime": "2025-12-11T18:00:00-05:00",
+                "endTime": "2025-12-12T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": -12,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 27
+                },
+                "windSpeed": "9 km/h",
+                "windDirection": "W",
+                "icon": "https://api.weather.gov/icons/land/night/snow,30?size=medium",
+                "shortForecast": "Chance Snow Showers",
+                "detailedForecast": "A chance of snow showers. Mostly cloudy, with a low around -12."
+            },
+            {
+                "number": 8,
+                "name": "Friday",
+                "startTime": "2025-12-12T06:00:00-05:00",
+                "endTime": "2025-12-12T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": -3,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 57
+                },
+                "windSpeed": "7 to 17 km/h",
+                "windDirection": "WSW",
+                "icon": "https://api.weather.gov/icons/land/day/snow,50/snow,60?size=medium",
+                "shortForecast": "Snow Showers Likely",
+                "detailedForecast": "Snow showers likely. Mostly cloudy, with a high near -3."
+            },
+            {
+                "number": 9,
+                "name": "Friday Night",
+                "startTime": "2025-12-12T18:00:00-05:00",
+                "endTime": "2025-12-13T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": -13,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 57
+                },
+                "windSpeed": "17 km/h",
+                "windDirection": "W",
+                "icon": "https://api.weather.gov/icons/land/night/snow,60/snow,50?size=medium",
+                "shortForecast": "Snow Showers Likely",
+                "detailedForecast": "Snow showers likely. Mostly cloudy, with a low around -13."
+            },
+            {
+                "number": 10,
+                "name": "Saturday",
+                "startTime": "2025-12-13T06:00:00-05:00",
+                "endTime": "2025-12-13T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": -7,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 29
+                },
+                "windSpeed": "19 km/h",
+                "windDirection": "W",
+                "icon": "https://api.weather.gov/icons/land/day/snow,30?size=medium",
+                "shortForecast": "Chance Snow Showers",
+                "detailedForecast": "A chance of snow showers. Mostly cloudy, with a high near -7."
+            },
+            {
+                "number": 11,
+                "name": "Saturday Night",
+                "startTime": "2025-12-13T18:00:00-05:00",
+                "endTime": "2025-12-14T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": -16,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 28
+                },
+                "windSpeed": "13 km/h",
+                "windDirection": "W",
+                "icon": "https://api.weather.gov/icons/land/night/snow,30/snow,20?size=medium",
+                "shortForecast": "Chance Snow Showers",
+                "detailedForecast": "A chance of snow showers. Mostly cloudy, with a low around -16."
+            },
+            {
+                "number": 12,
+                "name": "Sunday",
+                "startTime": "2025-12-14T06:00:00-05:00",
+                "endTime": "2025-12-14T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": -7,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 22
+                },
+                "windSpeed": "9 to 15 km/h",
+                "windDirection": "W",
+                "icon": "https://api.weather.gov/icons/land/day/snow,20/bkn?size=medium",
+                "shortForecast": "Slight Chance Snow Showers then Partly Sunny",
+                "detailedForecast": "A slight chance of snow showers before 7am. Partly sunny, with a high near -7."
+            },
+            {
+                "number": 13,
+                "name": "Sunday Night",
+                "startTime": "2025-12-14T18:00:00-05:00",
+                "endTime": "2025-12-15T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": -16,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 10
+                },
+                "windSpeed": "9 km/h",
+                "windDirection": "SSW",
+                "icon": "https://api.weather.gov/icons/land/night/cold?size=medium",
+                "shortForecast": "Mostly Cloudy",
+                "detailedForecast": "Mostly cloudy, with a low around -16."
+            },
+            {
+                "number": 14,
+                "name": "Monday",
+                "startTime": "2025-12-15T06:00:00-05:00",
+                "endTime": "2025-12-15T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": -4,
+                "temperatureUnit": "C",
+                "temperatureTrend": null,
+                "probabilityOfPrecipitation": {
+                    "unitCode": "wmoUnit:percent",
+                    "value": 32
+                },
+                "windSpeed": "7 to 15 km/h",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/day/snow,20/snow,30?size=medium",
+                "shortForecast": "Chance Snow Showers",
+                "detailedForecast": "A chance of snow showers after 7am. Mostly cloudy, with a high near -4."
+            }
+        ]
+    }
+}
