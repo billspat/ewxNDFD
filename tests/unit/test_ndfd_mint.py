@@ -1,7 +1,5 @@
-from pathlib import Path
-from datetime import datetime, timezone, date
-from zoneinfo import ZoneInfo
 
+from datetime import datetime, timezone, date
 import os
 import pytest
 
@@ -9,23 +7,6 @@ from ewxndfd.ndfd import NDFD
 
 # use contsant for example data path dir, but in future use data 
 # in example have the files present drive the tests with parameterized tests
-FIXTURE_DIR = Path(os.path.dirname(os.path.realpath(__file__))).parent  / 'ndfd_sample_files'
-
-@pytest.fixture
-def v_type():
-    return 'mint'
-
-@pytest.fixture
-def sample_dir():
-    return FIXTURE_DIR 
-
-@pytest.fixture
-def sample_datetime():
-    return datetime(2025, 11, 19, 2, 0, tzinfo=ZoneInfo("US/Eastern"))
-
-@pytest.fixture
-def sample_ndfd_mint():
-    return  'mint_20251119t06.csv'
 
 
 def test_ndfd_instance(sample_dir, v_type):
