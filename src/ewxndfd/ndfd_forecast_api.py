@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """methods to get unsummarized/ detailed forecast from the NDFD XML api and 
 summarize by day
 """
@@ -18,6 +19,7 @@ LANSING_LAT_LON = (42.73, -84.55)  # approximate lat/lon for Lansing, MI
 
 
 def construct_ndfd_digital_forecast_url(lat, lon, begin=None, end=None):
+    
     # dwml by default, not summarized 
     base_url = "https://digital.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php"
     
@@ -30,8 +32,11 @@ def construct_ndfd_digital_forecast_url(lat, lon, begin=None, end=None):
         date_future = '2030-04-20T00:00:00'
     else:
         date_future = end
-        
-    forecast_params = f"Unit=m&lat={lat}&lon={lon}&product=time-series&begin={date_today}&end={date_future}&maxt=maxt&mint=mint&rh=rh&wspd=wspd&qpf=qpf"
+    
+    metrics = ['maxt', 'mint', 'rh', 'wspd', 'qpf']
+    metrics_param = '&'.join([f"{m}={m}" for m in metrics])  # maxt=maxt&mint=mint...
+    
+    forecast_params = f"Unit=m&lat={lat}&lon={lon}&product=time-series&begin={date_today}&end={date_future}&{metrics_param}"
     
     forecast_url = f"{base_url}?{forecast_params}"
     
@@ -39,28 +44,27 @@ def construct_ndfd_digital_forecast_url(lat, lon, begin=None, end=None):
 
 def request_ndfd_digital_forecast(lat, lon, user_agent = DEFAULT_USER_AGENT):
     
-    # dwml by default, not summarized 
-    # base_url = "https://digital.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php?Unit=m"
-    
     date_today =  date.today().isoformat() + "T00:00:00"
-    date_future = '2030-04-20T00:00:00'
+    date_future = '2030-04-20T00:00:00'  
     
-    
-    # forecast_params = f"&lat={lat}&lon={lon}&product=time-series&begin={date_today}&end={date_future}&maxt=maxt&mint=mint&rh=rh&wspd=wspd&qpf=qpf"
-    
-    # forecast_elements = "maxt=maxt&mint=mint&rh=rh&wsp=wspd&qpf=qpf&appt=appt" 
-    # base_url = "https://digital.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php?"
-    # forecast_url = f"{base_url}?lat={lat}&lon={lon}&product=time-series&{forecast_elements}"  #&begin={begin}&end={end}
-     
     forecast_url = construct_ndfd_digital_forecast_url(lat, lon, begin=date_today, end=date_future) # f"{base_url}?{forecast_params}"
-    
-
     headers = {"User-Agent": user_agent}
     
     forecast_response = requests.get(forecast_url, headers=headers)
     return(forecast_response)
     
   
+
+def get_start_end_times(root, time_layout_key):
+    time_layouts = root.findall('.//time-layout')
+    for tl in time_layouts:
+        layout_key = tl.find('layout-key').text
+        if layout_key == time_layout_key:
+            start_times = [st.text for st in tl.findall('start-valid-time')]
+            end_times = [et.text for et in tl.findall('end-valid-time')]
+            return (start_times, end_times)
+    return ()
+
 
 def get_start_times(root, time_layout_key):
     time_layouts = root.findall('.//time-layout')
@@ -73,18 +77,23 @@ def get_start_times(root, time_layout_key):
 
 
 def weather_metric_xml_to_df(root, metric_path):
+    
     weather_values = root.find(metric_path)
     time_layout_key = weather_values.get('time-layout')
+    #start_times, end_times = get_start_end_times(root, time_layout_key)
     start_times = get_start_times(root, time_layout_key)
     values = [v.text for v in weather_values.findall('value')]
     
     df = pd.DataFrame(
         {
             'forecast_time': start_times,
+            # 'end_time': end_times,
             'value': values
         }
     )
+    
     df['forecast_date'] = pd.to_datetime(df['forecast_time']).dt.date
+    # df['end_date'] = pd.to_datetime(df['end_time']).dt.date
     df['value'] = pd.to_numeric(df['value'], errors='coerce')
     return df
 
@@ -95,7 +104,8 @@ def weather_metric_name_from_xml(root, metric_path):
     return f"{value_name} ({unit_name})"
     
     
-def daily_forecast_summary(lat, lon, hourly_weather = None):
+def daily_forecast_summary(lat, lon, hourly_weather = None, location_name = None, add_coordinates=True):
+    
     ######
     # add hourly weather into df here for today
     # the way it's added depends on the metric and how that's stored in df from the xml
@@ -109,40 +119,94 @@ def daily_forecast_summary(lat, lon, hourly_weather = None):
         
     root = ET.fromstring(resp.text)
     
+    # collect daily summaries for each metric.  The unique requirements of each 
+    # metric are the path to find it in the XML and how to summarize it by day
+    # to keep this easy to edit/copy&paste, re-using the variable name metric_df
+    # and then deleting the df before the next metric to ensure there is no 
+    # re-use causing bugs.  Since don't know how to to cleanly send the Pandas
+    # Summary functions as parameters, just repeat the code for each metric
     
+    metric_df_list = []
+    
+
     metric_path = './/humidity'
+    
+    metric_df = weather_metric_xml_to_df(root, metric_path)
+    if metric_df.empty:
+        raise ValueError(f"The element {metric_path} not found found in NDFD forecast XML.")
     metric_name = weather_metric_name_from_xml(root, metric_path)
-    humidity_df = weather_metric_xml_to_df(root, metric_path)
+    
     # humidity must be summarized 
-    humidity_daily = pd.DataFrame(
+    metric_df_list.append(
+        pd.DataFrame(
         { 
-            f'Maximum {metric_name}': humidity_df.groupby('forecast_date')['value'].max(), 
-            f'Minimum {metric_name}': humidity_df.groupby('forecast_date')['value'].min()
+            f'Maximum {metric_name}': metric_df.groupby('forecast_date')['value'].max(), 
+            f'Minimum {metric_name}': metric_df.groupby('forecast_date')['value'].min()
         }
+        )
     )
+    del(metric_df)
     
+    metric_path = './/wind-speed[@type="sustained"]'
+    metric_name = weather_metric_name_from_xml(root, metric_path)
+    metric_df = weather_metric_xml_to_df(root, metric_path)
+    metric_df_list.append(
+        pd.DataFrame(
+        { 
+            f'Maximum {metric_name}':  metric_df.groupby('forecast_date')['value'].max(), 
+            f'Mean {metric_name}':  metric_df.groupby('forecast_date')['value'].mean()
+        }
+        )
+    )
+    del(metric_df)
     
+    metric_path = './/precipitation[@type="liquid"]'
+    metric_name = weather_metric_name_from_xml(root, metric_path)
+    metric_df = weather_metric_xml_to_df(root, metric_path)
+    metric_df_list.append(
+        pd.DataFrame(
+        { 
+            f'Total {metric_name}':  metric_df.groupby('forecast_date')['value'].sum()
+        }
+        )
+    )
+    del(metric_df)
+    
+
+    # max/min temps are already reported daily
     metric_path = ".//temperature[@type='minimum']"
     metric_name = weather_metric_name_from_xml(root, metric_path)
     min_temperature_df = weather_metric_xml_to_df(root, metric_path)
-    min_temperature_daily = pd.DataFrame(
-        { 
-            f'{metric_name}': min_temperature_df.groupby('forecast_date')['value'].first()
-        }
+    metric_df_list.append( 
+        pd.DataFrame(
+            { 
+            f'{metric_name}': min_temperature_df.groupby('forecast_date')['value'].min()
+            }
+        )
     )
     
     metric_path = ".//temperature[@type='maximum']"
     metric_name = weather_metric_name_from_xml(root, metric_path)
     max_temperature_df = weather_metric_xml_to_df(root, metric_path)
-    max_temperature_daily = pd.DataFrame(
-        { 
-            f'{metric_name}': max_temperature_df.groupby('forecast_date')['value'].first()  
-        }
+    metric_df_list.append(    
+        pd.DataFrame(
+            { 
+            f'{metric_name}': max_temperature_df.groupby('forecast_date')['value'].max()  
+            }
+        )
     )
     
-    summary_df = pd.concat([humidity_daily, min_temperature_daily, max_temperature_daily], axis=1)
-    summary_df = summary_df.rename_axis('forecast_date').reset_index()
+    summary_df = pd.concat(metric_df_list, axis=1)    # [humidity_daily, min_temperature_daily, max_temperature_daily, windspeed_daily], axis=1)
 
+    if add_coordinates:
+        summary_df['latitude'] = lat
+        summary_df['longitude'] = lon
+    
+    if location_name is not None:
+        summary_df.insert(0,'Location', location_name)
+        
+    summary_df = summary_df.rename_axis('forecast_date').reset_index()
+    
     return summary_df
 
 def main():
@@ -166,30 +230,40 @@ def main():
 
     parser = argparse.ArgumentParser(
         prog="ndfd_forecast_api",
-        description="Retrieve and summarize NDFD digital weather forecast for a location",
+        description="""Retrieve point-level NDFD forecast values from 
+        https://digital.weather.gov/xml/ API and return create a daily summary.  
+        Optionally include a location name column. 
+        For example:  
+        ndfd_daily -lat 42.73 -lon -84.44 --location LAN"""
     )
 
-    parser.add_argument("--latitude", "-lat", type=_valid_lat,
-                        help="Latitude in decimal degrees (-90..90). If omitted, a default will be used.")
-    parser.add_argument("--longitude", "-lon", type=_valid_lon,
-                        help="Longitude in decimal degrees (-180..180). If omitted, a default will be used.")
+    # required args 
+    parser.add_argument("--latitude", "-lat", type=_valid_lat, required=True,
+                        help="Latitude in decimal degrees (-90..90), for example 42.73 (required)")
+    parser.add_argument("--longitude", "-lon", type=_valid_lon,required=True,
+                        help="Longitude in integer decimal degrees (-180..180), for example -84.44 (required)")
+    
+    # optional args
     parser.add_argument("--user-agent", dest="user_agent", default=DEFAULT_USER_AGENT,
-                        help="User-Agent header to send with requests")
+                        help=f"User-Agent header to send with requests, defaults to {DEFAULT_USER_AGENT}")
+    
+    parser.add_argument("--location", type=str, default=None,
+                      help="Optional value for Location column to key output, to enable combining with other locations")
 
     args = parser.parse_args()
 
-    # Use provided values or fall back to default
-    lat = args.latitude if args.latitude is not None else LANSING_LAT_LON[0]
-    lon = args.longitude if args.longitude is not None else LANSING_LAT_LON[1]
 
     try:
-        daily_forecast_df = daily_forecast_summary(lat, lon, hourly_weather=None)
+        daily_forecast_df = daily_forecast_summary(lat=args.latitude, 
+                                                   lon = args.longitude, 
+                                                   hourly_weather=None, 
+                                                   location_name=args.location)
     except Exception as exc:
         print(f"Error retrieving forecast: {exc}", file=sys.stderr)
         sys.exit(2)
 
     # print CSV to stdout
-    print(daily_forecast_df.to_csv(index=True))
+    print(daily_forecast_df.to_csv(index=False))
     
 if __name__ == "__main__":
     main()
