@@ -1,4 +1,4 @@
-# ewxNDFDL: Daily forecast data for the Enviroweather MesoNet
+# ewxNDFD: forecast data for the Enviroweather MesoNet
 
 ewxNDFD is a Python package to collect and transform weather forecast data from
 the National Digital Forecast Database (NDFD) gridded weather forecast.  It was 
@@ -16,6 +16,25 @@ the US NOAA who develop, caclulate, and distribute these forecasts.  We thank
 the regional US weather offices that review and adjust the forecasts and make 
 them freely available soprograms like Enviroweather can provide guidance for our
 agricultural community.
+
+## About the ouptut
+
+The main output of this package is a daily forecast table in the form, for example
+from the command `ndfd_daily -lat 42.73 -lon -84.44 --location LAN`
+
+(note currently there is a bug for first/last day min/max temperature )
+
+| forecast_date | Location | Maximum Relative Humidity (%) | Minimum Relative Humidity (%) | Maximum Wind Speed (m/s) | Mean Wind Speed (m/s) | Total Liquid Precipitation (cm) | Daily Min Temp (°C) | Daily Max Temp (°C) | latitude | longitude |
+|---------------|----------|--------------------------------|--------------------------------|---------------------------|------------------------|-----------------------------------|----------------------|----------------------|----------|-----------|
+| 2025-12-16    | LAN      | 88                             | 71                             | 8                         | 6.13                   | 0.0                               | -2.0                 | 2                    | 42.73    | -84.44    |
+| 2025-12-17    | LAN      | 96                             | 76                             | 8                         | 4.61                   | 0.0                               | -3.0                 | 4                    | 42.73    | -84.44    |
+| 2025-12-18    | LAN      | 96                             | 89                             | 8                         | 7.00                   | 0.84                              | -7.0                 | 7                    | 42.73    | -84.44    |
+| 2025-12-19    | LAN      | 96                             | 68                             | 7                         | 5.50                   | 0.03                              | -7.0                 | -3                   | 42.73    | -84.44    |
+| 2025-12-20    | LAN      | 79                             | 70                             | 6                         | 5.25                   |                                   | -6.0                 | 3                    | 42.73    | -84.44    |
+| 2025-12-21    | LAN      | 96                             | 78                             | 3                         | 2.75                   |                                   | -8.0                 | -1                   | 42.73    | -84.44    |
+| 2025-12-22    | LAN      | 88                             | 71                             | 3                         | 2.00                   |                                   |                     
+
+
 
 ## Get started with the package
 
