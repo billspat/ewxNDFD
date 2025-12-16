@@ -1,14 +1,11 @@
-# Welcome to ewxNDFD
+# ewxNDFDL: Daily forecast data for the Enviroweather MesoNet
 
 ewxNDFD is a Python package to collect and transform weather forecast data from
 the National Digital Forecast Database (NDFD) gridded weather forecast.  It was 
 created specifically for used by [MSU Enviroweather](https://enviroweather.msu.edu)
+but may be useful for other applications needing daily forecast summaries by coordinate. 
 
-This project is currently in early stages and under heavy development.  The goal
-is to create a small library for pulling specific daily forecast weather metrics 
-for the NWS seven-day forecast for specific locations to augment weather network
-data.  This forecast data will be used in crop, pest, and weather models created
-by MSU Enviroweather system. 
+This project is currently in early stages and under heavy development. 
 
 MSU Enviroweather previously collected forecast data from NDFD by grid, downloading
 GRIB files and extracting values. This is the successor to that system with 
@@ -22,25 +19,38 @@ agricultural community.
 
 ## Get started with the package
 
-This program is not yet available on PyPI or conda.  To use, either 
-1) obtain a copy of latest build in compressed or wheel form, labelled as ewxndfd-0.0.1.tar.gz or ewxndfd-0.0.1-py3-none-any.whl
+This program is not yet available on PyPI or conda.  To install the latest versiom, either 
+1) obtain a copy of latest build in compressed or wheel form from a developer, 
+   file `ewxndfd-0.x.x.tar.gz` or `ewxndfd-0.x.x-py3-none-any.whl` 
    and install using pip, for example:
    
-   `pip install ewxndfd-0.0.1-py3-none-any.whl`
+   `pip install /path/to/ewxndfd-0.0.1-py3-none-any.whl`
+
+   (adjust version number as needed)
+
+   it's a future goal to create releases on github to use from there
+
 2) clone this repository and build the package locally (see Development and building below)
 and install the built package file in the 'dist' folder using pip as above.
 
+#### Using Conda
+
+Currently this doesn't have a conda build.sh script, so use pip to install from 
+a wheel file inside a conda environment.
+
+
 ## Development and building
 
-This POC uses the "hatch" python project management tool which in turn uses uv
+This POC uses the [uv](https://docs.astral.sh/uv/) python project management tool
 
-- install hatch (see website)
+- install uv (see https://docs.astral.sh/uv/getting-started/installation/)
 - clone this package 
 - cd to ewxndfd directory
-- to use in other code, build using `hatch build` which will create a wheel file in the dist/ directory
-- to contribute/edit code, try running `hatch run test:pytest` which should create  
+- to use the package, build using `uv build` which will create a wheel file in the dist/ directory
+  and see instructions above for using in your project with a virtual environment
+- to contribute/edit code, try running `uv run test:pytest` which should create  
   a virtual environment named 'test' and run pytest in that environment.
-- tests require access to sample data, which are not included in this repository. 
+- some Enviroweather-specific tests require access to sample data, which are not included in this repository. 
   The location of there example files is currently hardcoded in the text code, along with the expected dates to check
   based on the files present.   
   Current setup: Copy NDFD CSV files (in ndfd_auto format) matching *_20251119*.csv 
@@ -48,7 +58,55 @@ This POC uses the "hatch" python project management tool which in turn uses uv
 
 ## Example usage
 
-iPython notebooks in the /notebooks folder provide example usage of the package.
+### combining with today's weather so far
+
+The NDFD point forecast from this hourly API only includes hourly forecasts for the 
+remainder of today.  If you need a daily forecast summary for today, you need to 
+provide actual observations of that data for the coordinate of interest.   This
+is not fully implemented yet, so the forecast summary for today will not be 
+accurate until this is added.
+
+This package is designed to allow you to provide your own actual hourly weather data, 
+for example from a weather station, or other source, to combine with the NDFD forecast
+data to create a full daily summary for today.  The actual hourly weather data
+should be provided as a pandas DataFrame with a datetime index and columns
+matching the expected variable names (see documentation for `daily_forecast_summary`
+function for details).
+
+A future direction is for the package to access observed weather data from a source like 
+[NOAA ISD](https://www.ncei.noaa.gov/products/global-hourly) or python package 
+like [Meteostat](https://dev.meteostat.net/python/) other source to combine with 
+the NDFD forecast data to create a full daily summary for today.
+
+
+### using inside python code
+
+Once installed in your virtual environment, you can import and use the package in your python code.
+
+```python
+(lat, lon) = (42.7261, -84.4833)  # example coordinates for Lansing, MI
+from ewxndfd.ndfd_forecast_api import daily_forecast_summary
+daily_forecast_df = daily_forecast_summary(lat= lat
+                                           lon = lon
+                                           hourly_weather=None, 
+                                           location_name="LAN")
+
+print(daily_forecast_df)
+
+```
+
+### Command line interface (cli)
+
+the package installed a command line interface `ndfd_daily` that can be used get
+daily summaries NDFD forecast data for a specific location.  Example usage: 
+
+```
+ ndfd_daily --lat 42.7261 --lon -84.4833 --location-name LAN
+``` 
+
+### Example Notebooks
+
+Python notebooks in the /notebooks folder provide example usage of the package.
 These notebooks require the ewxndfd package to be installed in the python environment
 used to run the notebooks.
 
