@@ -1,6 +1,10 @@
 ### Linux template
 *~
 
+# sample data
+# /tests/ndfd_sample_files/*.csv
+# for now keep sample data in repo for testing purposes, but we need
+# a way to either download or generate sample data for testing
 
 
 # ignore components that the Hatch template created but that not used currently
@@ -15,10 +19,6 @@ CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 DEVELOPMENT.md
 
-
-# sample data
-
-/tests/ndfd_sample_files/*.csv
 
 
 
