@@ -3,7 +3,8 @@ from datetime import date
 import os
 import pytest
 
-from ewxndfd.mint_ndfd import NDFDMinT
+
+from ewxndfd.ewx.mint_ndfd import NDFDMinT
 
 
 def test_ndfdmint_instantiation(sample_dir):

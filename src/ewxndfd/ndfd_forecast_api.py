@@ -256,8 +256,7 @@ def main():
     try:
         daily_forecast_df = daily_forecast_summary(lat=args.latitude, 
                                                    lon = args.longitude, 
-                                                   hourly_weather=None, 
-                                                   location_name=args.location)
+                                                   hourly_weather=None, location_name=args.location)
     except Exception as exc:
         print(f"Error retrieving forecast: {exc}", file=sys.stderr)
         sys.exit(2)

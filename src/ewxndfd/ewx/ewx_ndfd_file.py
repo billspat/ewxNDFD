@@ -4,8 +4,8 @@ from zoneinfo import ZoneInfo
 import os
 import csv
 
-from .ewx_datetime_utils import ensure_datetime_has_tz, is_utc
-
+from ewxndfd.datetime_utils import is_utc,ensure_datetime_has_tz
+from . import DEFAULT_TIME_ZONE    
 
 DAILY_NDFD_VARIABLE_TYPES = {
     "maxr", #daily max relative humidity
@@ -25,8 +25,7 @@ HOURLY_NDFD_VARIABLE_TYPES = {
     "wspd"  # hourly wind speed
 }
 
-DEFAULT_TIME_ZONE = "US/Eastern"
-    
+
     
 class NDFD():
     """small class for finding, reading, filtering, and transforming NDFD

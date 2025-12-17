@@ -3,7 +3,7 @@ from datetime import datetime, timezone, date
 import os
 import pytest
 
-from ewxndfd.ndfd import NDFD
+from ewxndfd.ewx.ewx_ndfd_file import NDFD
 
 # use contsant for example data path dir, but in future use data 
 # in example have the files present drive the tests with parameterized tests

@@ -1,4 +1,4 @@
-from ewxndfd.ndfd import NDFD, DEFAULT_TIME_ZONE
+from ewxndfd.ewx.ewx_ndfd_file import NDFD, DEFAULT_TIME_ZONE
 
 class NDFDMinT(NDFD):
     """small class for reading, filtering, and transforming NDFD

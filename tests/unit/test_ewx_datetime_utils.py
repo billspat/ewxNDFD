@@ -1,5 +1,5 @@
 
-from ewxndfd.ewx_datetime_utils import ensure_datetime_has_tz, has_timezone
+from ewxndfd.datetime_utils import ensure_datetime_has_tz, has_timezone
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 import pytest
