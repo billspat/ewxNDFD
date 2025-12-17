@@ -158,6 +158,21 @@ print(mint_fcst[0:10])
 
 ``` 
 
+## About NDFD
+
+NDFD is a large office and offers many products from different offices and has 
+documentation in different places.  This attempts to list relevant links for the
+data we are using. 
+
+#### Point level data
+
+weare 
+
+#### Metadata description
+This page is from the NDFD GIS group, and describes variables that appear in 
+GIS files (e.g. GRIB files) but should apply to the data available from the point
+API (digital
+)
 ## Copyright
 
 - Copyright © 2025 MSU Trustees
