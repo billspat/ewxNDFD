@@ -166,7 +166,41 @@ data we are using.
 
 #### Point level data
 
-weare 
+The main service this package use is the [Point data from National Digital Forecast Database]
+(https://vlab.noaa.gov/web/mdl/ndfd-point-data) (NDFD) via a 
+Representational State Transfer (REST) XML Web Service, documented on
+
+https://graphical.weather.gov/xml/rest.php
+
+[Guidelines for using this service](https://graphical.weather.gov/xml/mdl/XML/Design/WebServicesUseGuidelines.php)
+
+The NDFD is updated 25 and 55 minutes after the hour. A future feature for this
+package is to cache forecasts downloaded to prevent redownloading the same data
+Not that the the authors' use of this library is to save the results in a 
+database and only downloads the latest data once per point. 
+
+This library uses the **Single Point Unsummarized Data** from 
+
+https://digital.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php
+
+See the documentation on the page above for details about the input parameters. 
+
+A example URL or API query that works with this service is: 
+
+`https://digital.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php?Unit=m&lat=42.73&lon=-84.55&product=time-series&maxt=maxt&mint=mint&rh=rh&wspd=wspd&qpf=qpf`
+
+which returns values in metric units for maximum temperature (maxt), minimum temperature (mint), relative humidity (rh), wind speed (wspd), and liquid precipitation (qpf) for the lat/lon coordinate 42.73, -84.55 from the current day for the time remaining to the end of the forecast period.
+
+Adding in historical dates does not return previous NDFD forecasts. this service only returns the latest forecast available.  Setting an end data is useful to limit the forecast period returned 
+to reduce the load on the servers, but this library always returns 7 days. 
+
+
+
+
+The variables available from this service are documented on the [NDFD Element Names](https://graphical.weather.gov/xml/docs/elementInputNames.php) Page, however not all of these elements 
+may be available from the example API above. 
+
+
 
 #### Metadata description
 This page is from the NDFD GIS group, and describes variables that appear in 
