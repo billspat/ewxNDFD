@@ -147,18 +147,21 @@ def daily_forecast_summary(lat, lon, hourly_weather = None, location_name = None
     )
     del(metric_df)
     
-    metric_path = './/wind-speed[@type="sustained"]'
-    metric_name = weather_metric_name_from_xml(root, metric_path)
-    metric_df = weather_metric_xml_to_df(root, metric_path)
-    metric_df_list.append(
-        pd.DataFrame(
-        { 
-            f'Maximum {metric_name}':  metric_df.groupby('forecast_date')['value'].max(), 
-            f'Mean {metric_name}':  metric_df.groupby('forecast_date')['value'].mean()
-        }
-        )
-    )
-    del(metric_df)
+    ## wind speed
+    # disabled, not included in daily summary as it's a logical daily statistic 
+    # but will be included in hourly forecast 
+    # metric_path = './/wind-speed[@type="sustained"]'
+    # metric_name = weather_metric_name_from_xml(root, metric_path)
+    # metric_df = weather_metric_xml_to_df(root, metric_path)
+    # metric_df_list.append(
+    #     pd.DataFrame(
+    #     { 
+    #         f'Maximum {metric_name}':  metric_df.groupby('forecast_date')['value'].max(), 
+    #         f'Mean {metric_name}':  metric_df.groupby('forecast_date')['value'].mean()
+    #     }
+    #     )
+    # )
+    # del(metric_df)
     
     metric_path = './/precipitation[@type="liquid"]'
     metric_name = weather_metric_name_from_xml(root, metric_path)
